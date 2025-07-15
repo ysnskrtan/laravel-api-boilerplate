@@ -1,0 +1,829 @@
+{
+  "info": {
+    "name": "Laravel API Boilerplate",
+    "description": "Complete API collection for Laravel API Boilerplate with authentication, users, posts, file uploads, and health checks",
+    "version": "1.0.0",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{auth_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8000/api",
+      "type": "string"
+    },
+    {
+      "key": "auth_token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 200) {",
+                  "    const response = pm.response.json();",
+                  "    pm.environment.set(\"auth_token\", response.data.token);",
+                  "    pm.collectionVariables.set(\"auth_token\", response.data.token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"test@example.com\",\n  \"password\": \"password\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Current User",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/user",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/logout",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "System Health Check",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/health",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "health"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Users with Roles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/with-roles",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users",
+                "with-roles"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/users/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "users",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Posts API v1",
+      "item": [
+        {
+          "name": "Get All Posts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/posts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Posts with Filters",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/posts?filter[status]=published&filter[search]=laravel&sort=-created_at&include=user&per_page=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "filter[status]",
+                  "value": "published"
+                },
+                {
+                  "key": "filter[search]",
+                  "value": "laravel"
+                },
+                {
+                  "key": "sort",
+                  "value": "-created_at"
+                },
+                {
+                  "key": "include",
+                  "value": "user"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Post",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"My First API Post\",\n  \"content\": \"This is the content of my first post created via API. It demonstrates the power of our Laravel API boilerplate.\",\n  \"excerpt\": \"A brief excerpt of the post\",\n  \"status\": \"published\",\n  \"featured_image\": \"https://via.placeholder.com/800x600\",\n  \"meta_data\": {\n    \"tags\": [\"laravel\", \"api\", \"boilerplate\"],\n    \"category\": \"Technology\",\n    \"reading_level\": \"intermediate\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/v1/posts",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Post by Slug",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/posts/my-first-api-post?include=user",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts",
+                "my-first-api-post"
+              ],
+              "query": [
+                {
+                  "key": "include",
+                  "value": "user"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Post",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Updated API Post Title\",\n  \"content\": \"This is the updated content of my post. Now it has more information and better structure.\",\n  \"status\": \"published\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/v1/posts/my-first-api-post",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts",
+                "my-first-api-post"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Publish Post",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/posts/my-first-api-post/publish",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts",
+                "my-first-api-post",
+                "publish"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Archive Post",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/posts/my-first-api-post/archive",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts",
+                "my-first-api-post",
+                "archive"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Post",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/posts/my-first-api-post",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts",
+                "my-first-api-post"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Posts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/posts/my-posts?sort=-created_at&per_page=10",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts",
+                "my-posts"
+              ],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "-created_at"
+                },
+                {
+                  "key": "per_page",
+                  "value": "10"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Published Posts (Public)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/posts/published?sort=-published_at&include=user&per_page=15",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts",
+                "published"
+              ],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "-published_at"
+                },
+                {
+                  "key": "include",
+                  "value": "user"
+                },
+                {
+                  "key": "per_page",
+                  "value": "15"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "File Upload",
+      "item": [
+        {
+          "name": "Upload Image",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "alt_text",
+                  "value": "Sample image description",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/upload/image",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "upload",
+                "image"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Upload File",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                },
+                {
+                  "key": "description",
+                  "value": "Sample file upload",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/upload/file",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "upload",
+                "file"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete File",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/files/sample-file.jpg",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "files",
+                "sample-file.jpg"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Advanced Query Examples",
+      "item": [
+        {
+          "name": "Posts - Complex Filtering",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/posts?filter[status]=published&filter[user_id]=1&filter[search]=laravel&sort=-published_at,title&include=user&per_page=5&page=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "filter[status]",
+                  "value": "published"
+                },
+                {
+                  "key": "filter[user_id]",
+                  "value": "1"
+                },
+                {
+                  "key": "filter[search]",
+                  "value": "laravel"
+                },
+                {
+                  "key": "sort",
+                  "value": "-published_at,title"
+                },
+                {
+                  "key": "include",
+                  "value": "user"
+                },
+                {
+                  "key": "per_page",
+                  "value": "5"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Posts - Draft Filter",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/posts?filter[draft]=true&sort=-created_at",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "filter[draft]",
+                  "value": "true"
+                },
+                {
+                  "key": "sort",
+                  "value": "-created_at"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Posts - Published Filter",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/posts?filter[published]=true&sort=-published_at",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "filter[published]",
+                  "value": "true"
+                },
+                {
+                  "key": "sort",
+                  "value": "-published_at"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Posts - Sort by Author",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/v1/posts?sort=author&include=user",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "posts"
+              ],
+              "query": [
+                {
+                  "key": "sort",
+                  "value": "author"
+                },
+                {
+                  "key": "include",
+                  "value": "user"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+} 
