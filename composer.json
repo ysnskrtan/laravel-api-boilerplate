@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "yourusername/laravel-api-boilerplate",
+    "name": "ysnskrtan/laravel-api-boilerplate",
     "type": "project",
     "description": "A comprehensive Laravel API boilerplate with authentication, authorization, advanced querying, and more.",
     "keywords": [

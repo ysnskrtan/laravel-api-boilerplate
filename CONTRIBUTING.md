@@ -28,7 +28,7 @@ There are many ways to contribute to this project:
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/laravel-api-boilerplate.git
+   git clone https://github.com/ysnskrtan/laravel-api-boilerplate.git
    cd laravel-api-boilerplate
    ```
 
@@ -299,7 +299,7 @@ Technical details or considerations
 **Do NOT report security vulnerabilities publicly.**
 
 For security issues:
-1. Email: security@yourproject.com
+1. Email: hi@mobita.co
 2. Include detailed reproduction steps
 3. Wait for acknowledgment before public disclosure
 4. Allow reasonable time for fix implementation
@@ -382,7 +382,7 @@ Contributors will be recognized in:
 
 - **GitHub Issues** - For bugs and feature requests
 - **GitHub Discussions** - For questions and community chat
-- **Email** - support@yourproject.com
+- **Email** - hi@mobita.co
 
 ### Development Help
 

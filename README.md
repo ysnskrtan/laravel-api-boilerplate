@@ -59,7 +59,7 @@ A comprehensive, production-ready Laravel API boilerplate that saves you weeks o
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/laravel-api-boilerplate.git
+   git clone https://github.com/ysnskrtan/laravel-api-boilerplate.git
    cd laravel-api-boilerplate
    ```
 
@@ -282,7 +282,7 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 - **Documentation**: Check the `docs/` directory
 - **Issues**: Report bugs via GitHub Issues
 - **Discussions**: Join our GitHub Discussions
-- **Email**: support@yourproject.com
+- **Email**: hi@mobita.co
 
 ## 🌟 Show Your Support
 
